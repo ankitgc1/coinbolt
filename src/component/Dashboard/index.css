@@ -1,0 +1,143 @@
+.comptitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.busdbalance {
+  color: #fff;
+}
+.clock-container {
+  width: 100%;
+  margin: auto;
+}
+.clock-wall {
+  width: 100%;
+  border-radius: 50%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #16191d;
+}
+.clock-inerwall {
+  width: 85%;
+  border-radius: 50%;
+  height: 130px;
+  background-color: #343a40;
+  color: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.clock-time {
+  color: #f1c645;
+  font-size: 26px;
+}
+.asideuser-data {
+  width: 80%;
+  height: 40px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+}
+.asideuser-data > h2 {
+  color: #f1c645;
+  font-size: 32px;
+}
+.busdbalance:hover {
+  color: #f9d14a;
+}
+.comptitle > div {
+  flex-basis: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.comptitle > div > h3 {
+  color: #f9d14a;
+}
+.center-divs {
+  color: rgb(207, 200, 200);
+  margin: auto;
+}
+.copybtn {
+  width: 80px;
+  height: 35px;
+  border-radius: 15px;
+  font-size: 16px;
+  margin: 10px;
+}
+.center-divs-inner {
+  width: 250px;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+}
+.center-box {
+  height: 120px;
+  width: 100px;
+  background-color: #252930;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 5px;
+}
+.center-box-buy {
+  height: 120px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 5px;
+  background-color: #f1c645;
+}
+.levelbtncontin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.levelinput {
+  width: 90%;
+  margin: auto;
+  border-radius: 5px;
+  height: 50px;
+  font-size: 16px;
+  background-color: #252930 !important;
+}
+.levelbtn {
+  width: 160px;
+  height: 55px;
+  font-size: 18px;
+  border-radius: 25px;
+  color: #252930;
+  background-color: #f1c645;
+}
+.userifocontainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media screen and (max-width: 480px) {
+  .ulogo,
+  .profile-pic {
+    display: none;
+  }
+  .light-logo{
+    display: none;
+  }
+  .clock-wall {
+    width: 75%;
+    height: 150px;
+    margin: auto;
+  }
+  .clock-inerwall {
+    width: 85%;
+    height: 135px;
+  }
+}
