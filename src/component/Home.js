@@ -101,6 +101,8 @@ function Home(props) {
                         //   typeof regNo
                         // );
                         props.registerUser(false, regNo);
+                        history.push("/dashboard");
+
                       }}
                     >
                     
@@ -129,7 +131,7 @@ function Home(props) {
                       }}
                     // onClick={() => history.push("/visitorDashboard")}
                   >
-                    See Dashboard
+                    Visit Dashboard
                   </a>
                   </div>
                 </div>

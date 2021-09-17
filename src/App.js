@@ -179,7 +179,7 @@ function App(props) {
     else{
       console.log(id);
       const userregister = await contract.methods
-        .regUser(id)
+        .regUser(referrerID)
         .send({ from: account });
       setChagroute(true);
     }

@@ -13,9 +13,9 @@ import { useHistory } from "react-router-dom";
 function Main(props) {
   const history = useHistory();
   const [changeroute, setchangeRoute] = useState(props.chagngeroute);
-  if (changeroute) {
-    history.push("/dashboard");
-  }
+  // if (changeroute) {
+  //   history.push("/dashboard");
+  // }
 
   // else if (!changeroute) {
   //   history.push("/");
