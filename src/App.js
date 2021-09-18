@@ -8,18 +8,17 @@ import {
   useHistory,
   Switch,
   Router,
-
 } from "react-router-dom";
 import Web3 from "web3";
 import { useSelector, useDispatch } from "react-redux";
 import { currentRefralid } from "./redux/sellerReducer";
 import Dashboard from "./component/Dashboard/Index";
 import moment from "moment";
-import VisitorDashbaord from './component/visitorDashboard';
+// import VisitorDashbaord from './component/visitorDashboard';
+import ViewUserProfile from "./component/viewUserProfile/Index";
 
 // console.log("lol");
 // window.location = window.location.origin;
-
 
 function App(props) {
   const [contract, setContract] = useState();
@@ -37,10 +36,9 @@ function App(props) {
   const [chaildaddr, setChailaddr] = useState([]);
   var referrerID = 1;
 
-  if (window.location.href.includes('invite')) {
-    referrerID = window.location.href.split('/')[4];
+  if (window.location.href.includes("invite")) {
+    referrerID = window.location.href.split("/")[3].split(':')[1];
   }
-  // console.log("lol", referrerID);
 
   const dispatch = useDispatch();
   // =======user inputRefralid  throw refrrer link=======
@@ -103,7 +101,7 @@ function App(props) {
 
   const load = async () => {
     await loadWeb3();
-  
+
     // console.log("lol" ,window.location);
     // window.location = window.location.origin;
   };
@@ -121,7 +119,6 @@ function App(props) {
     if (account) {
       let ref = await contract.methods.viewUserReferral(account).call();
       console.log("user refferral is ,,,,. ----------->", ref);
-      // debugger;
       setChailaddr((pre) => [...pre, ref[0], ref[1]]);
     }
   };
@@ -142,7 +139,6 @@ function App(props) {
   };
   const chailAddressData = async () => {
     if (chaildaddr[0]) {
-      debugger;
       const child1 = await contract.methods.users(chaildaddr[0]).call();
       setChaildata((pre) => [...pre, child1]);
     }
@@ -152,39 +148,25 @@ function App(props) {
     }
   };
 
-
-  const viewingData = async (id) => {
-    console.log("lol", id);
-    // if (id) {
-      const address = await contract.methods.userList(18).call();
-      const data = await contract.methods.users(address).call();
-      console.log(data);
-      // const { isExist, id, referrerID, currentLevel, totalEarningUSDT } = data;
-      // if (isExist === true) {
-      //   // alert("user is alre registred");
-      //   setChagroute(true);
-      // }
-    // }
-  };
-
-
   const registerUser = async (v, id) => {
-    if (v){
-      // debugger;
-      console.log(id);
+    if (v) {
+      // console.log("View data", id);
       const address = await contract.methods.userList(id).call();
       const data = await contract.methods.users(address).call();
       setViewUserdata(data);
+    } else if(!v && id) {
+      const userregister = await contract.methods
+        .regUser(id)
+        .send({ from: account });
+      setChagroute(true);
     }
     else{
-      console.log(id);
       const userregister = await contract.methods
         .regUser(referrerID)
         .send({ from: account });
       setChagroute(true);
     }
   };
-
 
   const approve = async () => {
     let approveData = await usdtContract.methods
@@ -197,6 +179,7 @@ function App(props) {
   const totalEarningUSDT = async () => {
     let sum = 0;
     if (contract && account) {
+      // debugger;
       for (let i = 1; i <= 8; i++) {
         let earning = await window.web3.utils.fromWei(
           await contract.methods.EarnedUsdt(account, i).call()
@@ -849,7 +832,6 @@ function App(props) {
     // console.log("USDT contract-------", usdtContract);
   };
 
-
   // window.location = window.location.origin;
 
   return (
@@ -868,7 +850,7 @@ function App(props) {
           )}
         />
         <Route
-          path="/invite/:referrerID"
+          path="/invite:referrerID"
           exact
           component={() => (
             <Main
@@ -889,8 +871,8 @@ function App(props) {
               approve={approve}
               user={user}
               earnUsdt={earnUsdt}
-              buyLevel={buyLevels}
               account={account}
+              buyLevel={buyLevels}
               // loadContract={loadContract}
               contract={contract}
               userdata={userdata}
@@ -903,8 +885,8 @@ function App(props) {
         <Route
           path="/visitorDashboard"
           component={() => (
-            <VisitorDashbaord
-            viewuserdata={viewuserdata}
+            <ViewUserProfile
+              viewuserdata={viewuserdata}
             />
           )}
         />

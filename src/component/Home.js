@@ -3,15 +3,12 @@ import { Link, useHistory } from "react-router-dom";
 import { user, approve, inputRefralid } from "../redux/sellerReducer";
 import { useSelector, useDispatch } from "react-redux";
 import "./Home.css";
-import { Button } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
 
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 
-
-
 function Home(props) {
-
   const dispatch = useDispatch();
   const history = useHistory();
   //  current listed  refral id for refrrer
@@ -21,6 +18,7 @@ function Home(props) {
   const [inputValue, setInputValue] = useState();
   const [regNo, setRegNo] = useState();
   const [viewID, setviewID] = useState();
+  const [changeroute, setchangeRoute] = useState(props.chagngeroute);
 
   let [loading, setLoading] = useState(false);
   let [color, setColor] = useState("#ffffff");
@@ -86,7 +84,8 @@ function Home(props) {
                         }}
                       />
                     </div>
-                    <a style={{cursor:'pointer'}}
+                    <a
+                      style={{ cursor: "pointer" }}
                       onClick={() => {
                         dispatch(approve("approve"));
                       }}
@@ -95,6 +94,7 @@ function Home(props) {
                     </a>
                     <a
                       className="registrationbtn"
+                      style={{ cursor: "pointer" }}
                       onClick={() => {
                         // console.log(
                         //   "type of register id is----<<<",
@@ -102,16 +102,22 @@ function Home(props) {
                         // );
                         props.registerUser(false, regNo);
                         history.push("/dashboard");
-
+                        // if (changeroute) {
+                        //     history.push("/dashboard");
+                        // }
+                        // else {
+                        //   alert("Please register with MetMask!")
+                        // }
                       }}
                     >
-                    
                       <i className="fas fa-clipboard-list" />
                       Registration
                     </a>
-                    <input 
+                    <h4>Enter Id for check account</h4>
+                    <input
                       type="number"
                       placeholder="Enter Id"
+                      className="refralinput"
                       onChange={(e) => {
                         let y = e.target.value;
                         y = parseInt(y);
@@ -120,6 +126,7 @@ function Home(props) {
                       }}
                     />
                     <a
+                      style={{ cursor: "pointer" }}
                       onClick={() => {
                         // console.log(
                         //   "type of view id is----<<<",
@@ -129,10 +136,10 @@ function Home(props) {
                         history.push("/visitorDashboard");
                         // props.viewingData(viewID);
                       }}
-                    // onClick={() => history.push("/visitorDashboard")}
-                  >
-                    Visit Dashboard
-                  </a>
+                      // onClick={() => history.push("/visitorDashboard")}
+                    >
+                      Visit Dashboard
+                    </a>
                   </div>
                 </div>
                 <div className="banner_mockup homeimg-container">
