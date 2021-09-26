@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Button } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
 import { FcBusinessman } from "react-icons/fc";
 import { userRefralid } from "../../redux/sellerReducer";
 import "./index.css";
@@ -63,58 +63,16 @@ function Dashboard(props) {
       <body class="hold-transition dark-skin dark-sidebar sidebar-mini theme-mix">
         <div class="wrapper">
           <header class="main-header">
-            <a href="index.html" class="logo">
-              <div class="logo-mini">
-                <span class="light-logo">
-                  <img src="images/logo-light.png" alt="logo" />
-                </span>
-                <span class="dark-logo">
-                  <img src="images/logo-dark-2.png" alt="logo" />
-                </span>
-              </div>
-
-              <div class="logo-lg">
-                <span class="light-logo">
-                  <img src="images/logo-light-text.png" alt="logo" />
-                </span>
-                <span class="dark-logo">
-                  <img src="images/logo-dark-text-2.png" alt="logo" />
-                </span>
-              </div>
-            </a>
             <nav class="navbar navbar-static-top">
-              <div
-                style={{
-                  width: "90%",
-                  margin: "auto",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <div>
-                <h5>Your referral link:  {`${window.location.origin}/invite/${props.userdata.id}`}</h5>
-                  <Button variant="outline-warning"
-                    onClick={() =>  navigator.clipboard.writeText(`${window.location.origin}/invite/${props.userdata.id}`)}
-                  >
-                    Copy to clipboard
-                  </Button>
-
+              <div className="menuebar">
+                <div class="mob-logo-con">
+                  <img
+                    className="mob-logo-icon"
+                    style={{ width: "100px" }}
+                    src="logo512.png"
+                    alt="logo"
+                  />
                 </div>
-                {/* <a
-                  href="/"
-                  class="link"
-                  data-toggle="tooltip"
-                  title=""
-                  data-original-title="Logout"
-                >
-                  {" "}
-                  <div>
-                    <h3
-                      style={{ color: " #f1c645", cursor: "pointer" }}
-                    >{`${window.location.href}/id/${props.userdata.id}`}</h3>
-                  </div>
-                </a> */}
                 <div class="profile-info">
                   {/* log out icon */}
                   <div class="text-center d-inline-block">
@@ -195,7 +153,7 @@ function Dashboard(props) {
                   ) : (
                     ""
                   )}
-                  {props.chailddata[0] ? (
+                  {props.chailddata[1] ? (
                     <div
                       style={{
                         backgroundColor: "#343A40",
@@ -211,14 +169,14 @@ function Dashboard(props) {
                         <h6>Second Diract ID </h6>&nbsp;&nbsp;&nbsp;
                         <h3 style={{ color: "#f1c645" }}>
                           {" "}
-                          {props.chailddata[0].id}
+                          {props.chailddata[1].id}
                         </h3>
                       </div>
                       <div className="asideuser-data">
                         <h6>Second Diract's level </h6>&nbsp;&nbsp;&nbsp;
                         <h3 style={{ color: "#f1c645" }}>
                           {" "}
-                          {props.chailddata[0].currentLevel}
+                          {props.chailddata[1].currentLevel}
                         </h3>
                       </div>
                     </div>
@@ -231,8 +189,25 @@ function Dashboard(props) {
           </aside>
 
           <div class="content-wrapper">
+            <div className="copycontainer">
+              <h4>Your referral link:</h4>
+              <h5>
+                Your referral link:
+                {`${window.location.origin}/invite/${props.userdata.id}`}
+              </h5>
+              <Button
+                variant="outline-warning"
+                onClick={() =>
+                  navigator.clipboard.writeText(
+                    `${window.location.origin}/invite/${props.userdata.id}`
+                  )
+                }
+              >
+                Copy to clipboard
+              </Button>
+            </div>
             <div class="container-full">
-              <div style={{ zIndex: 10 }}>
+              <div style={{ zIndex: 10 }} className="body-container">
                 {" "}
                 <ClipLoader
                   color={color}
@@ -300,7 +275,7 @@ function Dashboard(props) {
                               {/* <i class="fa fa-money text-muted mr-5 mb-20"></i> */}
                               {/* <br></br> */}
                               <strong className="busdbalance">
-                                {props.earnUsdt ? props.earnUsdt : "0"}
+                                {props.earnBusd ? props.earnBusd : "0"}
                               </strong>
                             </p>
                           </div>
@@ -395,6 +370,88 @@ function Dashboard(props) {
                           </>
                         );
                       })}
+                    </div>
+                    {/* mobile card  */}
+                    <div className="user-pro-mob">
+                      <div class="" style={{ marginTop: "50px" }}>
+                        <div id="chartdiv3" class="">
+                          <div className="asideuser-data">
+                            <h4>Your ID </h4>&nbsp;&nbsp;&nbsp;
+                            <h2> {props.userdata.id}</h2>
+                          </div>
+
+                          <div className="asideuser-data">
+                            <h4>Level </h4>&nbsp;&nbsp;&nbsp;
+                            <h2>{props.userdata.currentLevel}</h2>
+                          </div>
+                          <div className="asideuser-data">
+                            {" "}
+                            <h4>Referrer ID </h4>&nbsp;&nbsp;&nbsp;
+                            <h2> {props.userdata.referrerID}</h2>
+                          </div>
+
+                          {props.chailddata[0] ? (
+                            <div
+                              style={{
+                                backgroundColor: "#343A40",
+                                margin: "20px",
+                                minHeight: "100px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                flexDirection: "column",
+                              }}
+                            >
+                              <div className="asideuser-data">
+                                <h6>First Diract ID </h6>&nbsp;&nbsp;&nbsp;
+                                <h3 style={{ color: "#f1c645" }}>
+                                  {props.chailddata[0].id}
+                                </h3>
+                              </div>
+                              <div className="asideuser-data">
+                                <h6>First Diract level's </h6>&nbsp;&nbsp;&nbsp;
+                                <h3 style={{ color: "#f1c645" }}>
+                                  {" "}
+                                  {props.chailddata[0].currentLevel}
+                                </h3>
+                              </div>
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                          {props.chailddata[1] ? (
+                            <div
+                              style={{
+                                backgroundColor: "#343A40",
+                                margin: "20px",
+                                minHeight: "100px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                flexDirection: "column",
+                              }}
+                            >
+                              <div className="asideuser-data">
+                                <h6>Second Diract ID </h6>&nbsp;&nbsp;&nbsp;
+                                <h3 style={{ color: "#f1c645" }}>
+                                  {" "}
+                                  {props.chailddata[1].id}
+                                </h3>
+                              </div>
+                              <div className="asideuser-data">
+                                <h6>Second Diract's level </h6>
+                                &nbsp;&nbsp;&nbsp;
+                                <h3 style={{ color: "#f1c645" }}>
+                                  {" "}
+                                  {props.chailddata[1].currentLevel}
+                                </h3>
+                              </div>
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="col-lg-5 col-12" style={{ marginTop: "10px" }}>

@@ -22,9 +22,9 @@ import ViewUserProfile from "./component/viewUserProfile/Index";
 
 function App(props) {
   const [contract, setContract] = useState();
-  const [usdtContract, setUsdtContract] = useState();
+  const [usdtContract, setBusdContract] = useState();
   const [account, setAccount] = useState("");
-  const [earnUsdt, setEarnUsdt] = useState();
+  const [earnBusd, setEarnBusd] = useState();
   const [curentregId, setCurentregId] = useState();
   const [idinput, setIdinput] = useState(false);
   const [chagroute, setChagroute] = useState(false);
@@ -171,7 +171,7 @@ function App(props) {
   const approve = async () => {
     let approveData = await usdtContract.methods
       .approve(
-        "0x9c8428702B1578D39347eD7DA59a7e81eBf5741e",
+        "0x38cC0003E3E7e8Ba90396F2EF09CB0Bf03A95C05",
         "1000000000000000000000000"
       )
       .send({ from: account });
@@ -182,12 +182,12 @@ function App(props) {
       // debugger;
       for (let i = 1; i <= 8; i++) {
         let earning = await window.web3.utils.fromWei(
-          await contract.methods.EarnedUsdt(account, i).call()
+          await contract.methods.EarnedBusd(account, i).call()
         );
         sum = sum + Number(earning);
         // console.log("earn usdt is ---->", i, earning);
       }
-      setEarnUsdt(sum);
+      setEarnBusd(sum);
       // console.log("sum is", sum);
     }
   };
@@ -206,345 +206,13 @@ function App(props) {
   };
 
   const loadContract = async () => {
-    let ABI = [
-      {
-        inputs: [],
-        payable: false,
-        stateMutability: "nonpayable",
-        type: "constructor",
-      },
-      {
-        anonymous: false,
-        inputs: [
-          {
-            indexed: true,
-            internalType: "address",
-            name: "UserAddress",
-            type: "address",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "Levelno",
-            type: "uint256",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "Time",
-            type: "uint256",
-          },
-        ],
-        name: "buyLevelEvent",
-        type: "event",
-      },
-      {
-        anonymous: false,
-        inputs: [
-          {
-            indexed: true,
-            internalType: "address",
-            name: "UserAddress",
-            type: "address",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "UserId",
-            type: "uint256",
-          },
-          {
-            indexed: true,
-            internalType: "address",
-            name: "ReferrerAddress",
-            type: "address",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "ReferrerId",
-            type: "uint256",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "Levelno",
-            type: "uint256",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "LevelPrice",
-            type: "uint256",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "Time",
-            type: "uint256",
-          },
-        ],
-        name: "getMoneyForLevelEvent",
-        type: "event",
-      },
-      {
-        anonymous: false,
-        inputs: [
-          {
-            indexed: true,
-            internalType: "address",
-            name: "UserAddress",
-            type: "address",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "UserId",
-            type: "uint256",
-          },
-          {
-            indexed: true,
-            internalType: "address",
-            name: "ReferrerAddress",
-            type: "address",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "ReferrerId",
-            type: "uint256",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "Levelno",
-            type: "uint256",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "LevelPrice",
-            type: "uint256",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "Time",
-            type: "uint256",
-          },
-        ],
-        name: "lostMoneyForLevelEvent",
-        type: "event",
-      },
-      {
-        anonymous: false,
-        inputs: [
-          {
-            indexed: true,
-            internalType: "address",
-            name: "UserAddress",
-            type: "address",
-          },
-          {
-            indexed: true,
-            internalType: "address",
-            name: "ReferrerAddress",
-            type: "address",
-          },
-          {
-            indexed: false,
-            internalType: "uint256",
-            name: "Time",
-            type: "uint256",
-          },
-        ],
-        name: "regLevelEvent",
-        type: "event",
-      },
-      {
-        constant: true,
-        inputs: [
-          { internalType: "address", name: "", type: "address" },
-          { internalType: "uint256", name: "", type: "uint256" },
-        ],
-        name: "EarnedUsdt",
-        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-        payable: false,
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        constant: true,
-        inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-        name: "LEVEL_PRICE",
-        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-        payable: false,
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        constant: true,
-        inputs: [],
-        name: "PERIOD_LENGTH",
-        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-        payable: false,
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        constant: true,
-        inputs: [],
-        name: "adminFee",
-        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-        payable: false,
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        constant: false,
-        inputs: [{ internalType: "uint256", name: "_level", type: "uint256" }],
-        name: "buyLevel",
-        outputs: [],
-        payable: false,
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-      {
-        constant: true,
-        inputs: [{ internalType: "address", name: "", type: "address" }],
-        name: "createdDate",
-        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-        payable: false,
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        constant: true,
-        inputs: [],
-        name: "currentId",
-        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-        payable: false,
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        constant: true,
-        inputs: [
-          { internalType: "address", name: "_userAddress", type: "address" },
-        ],
-        name: "findFreeReferrer",
-        outputs: [{ internalType: "address", name: "", type: "address" }],
-        payable: false,
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        constant: true,
-        inputs: [],
-        name: "getTotalEarnedUSDT",
-        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-        payable: false,
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        constant: true,
-        inputs: [{ internalType: "address", name: "", type: "address" }],
-        name: "loopCheck",
-        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-        payable: false,
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        constant: true,
-        inputs: [],
-        name: "ownerAddress",
-        outputs: [{ internalType: "address", name: "", type: "address" }],
-        payable: false,
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        constant: false,
-        inputs: [
-          { internalType: "uint256", name: "_referrerID", type: "uint256" },
-        ],
-        name: "regUser",
-        outputs: [],
-        payable: false,
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-      {
-        constant: false,
-        inputs: [
-          { internalType: "uint256", name: "_adminFee", type: "uint256" },
-        ],
-        name: "updateFeePercentage",
-        outputs: [{ internalType: "bool", name: "", type: "bool" }],
-        payable: false,
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-      {
-        constant: false,
-        inputs: [
-          { internalType: "uint256", name: "_level", type: "uint256" },
-          { internalType: "uint256", name: "_price", type: "uint256" },
-        ],
-        name: "updatePrice",
-        outputs: [{ internalType: "bool", name: "", type: "bool" }],
-        payable: false,
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-      {
-        constant: true,
-        inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-        name: "userList",
-        outputs: [{ internalType: "address", name: "", type: "address" }],
-        payable: false,
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        constant: true,
-        inputs: [{ internalType: "address", name: "", type: "address" }],
-        name: "users",
-        outputs: [
-          { internalType: "bool", name: "isExist", type: "bool" },
-          { internalType: "uint256", name: "id", type: "uint256" },
-          { internalType: "uint256", name: "referrerID", type: "uint256" },
-          { internalType: "uint256", name: "currentLevel", type: "uint256" },
-          {
-            internalType: "uint256",
-            name: "totalEarningUSDT",
-            type: "uint256",
-          },
-        ],
-        payable: false,
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        constant: true,
-        inputs: [
-          { internalType: "address", name: "_userAddress", type: "address" },
-        ],
-        name: "viewUserReferral",
-        outputs: [{ internalType: "address[]", name: "", type: "address[]" }],
-        payable: false,
-        stateMutability: "view",
-        type: "function",
-      },
-    ];
+    let ABI = [{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"UserAddress","type":"address"},{"indexed":false,"internalType":"uint256","name":"Levelno","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"Time","type":"uint256"}],"name":"buyLevelEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"UserAddress","type":"address"},{"indexed":false,"internalType":"uint256","name":"UserId","type":"uint256"},{"indexed":true,"internalType":"address","name":"ReferrerAddress","type":"address"},{"indexed":false,"internalType":"uint256","name":"ReferrerId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"Levelno","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"LevelPrice","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"Time","type":"uint256"}],"name":"getMoneyForLevelEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"UserAddress","type":"address"},{"indexed":false,"internalType":"uint256","name":"UserId","type":"uint256"},{"indexed":true,"internalType":"address","name":"ReferrerAddress","type":"address"},{"indexed":false,"internalType":"uint256","name":"ReferrerId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"Levelno","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"LevelPrice","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"Time","type":"uint256"}],"name":"lostMoneyForLevelEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"UserAddress","type":"address"},{"indexed":true,"internalType":"address","name":"ReferrerAddress","type":"address"},{"indexed":false,"internalType":"uint256","name":"Time","type":"uint256"}],"name":"regLevelEvent","type":"event"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"EarnedBusd","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"LEVEL_PRICE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"PERIOD_LENGTH","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"adminFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_level","type":"uint256"}],"name":"buyLevel","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"createdDate","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"currentId","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"_userAddress","type":"address"}],"name":"findFreeReferrer","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getTotalEarnedBUSD","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"loopCheck","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"ownerAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_referrerID","type":"uint256"}],"name":"regUser","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_adminFee","type":"uint256"}],"name":"updateFeePercentage","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_level","type":"uint256"},{"internalType":"uint256","name":"_price","type":"uint256"}],"name":"updatePrice","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"userList","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"users","outputs":[{"internalType":"bool","name":"isExist","type":"bool"},{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"referrerID","type":"uint256"},{"internalType":"uint256","name":"currentLevel","type":"uint256"},{"internalType":"uint256","name":"totalEarningBUSD","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"_userAddress","type":"address"}],"name":"viewUserReferral","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"}]
     const contract = await new window.web3.eth.Contract(
       ABI,
-      "0x9c8428702B1578D39347eD7DA59a7e81eBf5741e"
+      "0x38cC0003E3E7e8Ba90396F2EF09CB0Bf03A95C05"
     );
 
-    let UsdtABI = [
+    let BusdABI = [
       {
         inputs: [],
         payable: false,
@@ -823,11 +491,11 @@ function App(props) {
       },
     ];
     const USDTcontract = await new window.web3.eth.Contract(
-      UsdtABI,
-      "0x782Fa023d087bD05FF2082d41363FA72F6CcaC4E"
+      BusdABI,
+      "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"
     );
     setContract(contract);
-    setUsdtContract(USDTcontract);
+    setBusdContract(USDTcontract);
     // console.log("contract", contract);
     // console.log("USDT contract-------", usdtContract);
   };
@@ -870,7 +538,7 @@ function App(props) {
               getCurrentId={getCurrentId}
               approve={approve}
               user={user}
-              earnUsdt={earnUsdt}
+              earnBusd={earnBusd}
               account={account}
               buyLevel={buyLevels}
               // loadContract={loadContract}
@@ -878,7 +546,6 @@ function App(props) {
               userdata={userdata}
               chailddata={chailddata}
               date={date}
-              // userAddress={userAddress}
             />
           )}
         />
@@ -887,6 +554,8 @@ function App(props) {
           component={() => (
             <ViewUserProfile
               viewuserdata={viewuserdata}
+              chailddata={chailddata}
+              userdata={userdata}
             />
           )}
         />
