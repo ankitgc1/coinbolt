@@ -20,7 +20,7 @@ function ViewUserProfile(props) {
     border: 5px solid #f1c645;
   `;
 
-  console.log(props.viewuserdata);
+  console.log("lolo", props.viewuserdata);
   const date = new Date(props.Joiningdate);
   console.log("props.earnBusd", props.earnBusd, "props.Joiningdate", props.Joiningdate);
 
@@ -236,8 +236,8 @@ function ViewUserProfile(props) {
                           >
                             {/* <i class="fa fa-money text-muted mr-5 mb-20"></i> */}
                             {/* <br></br> */}
-                            {props.viewuserdata.totalEarningUSDT ? (
-                              props.viewuserdata.totalEarningUSDT /
+                            {props.viewuserdata.totalEarningBUSD ? (
+                              props.viewuserdata.totalEarningBUSD /
                               1000000000000000000
                             ) : (
                               <p className="busdbalance">0</p>

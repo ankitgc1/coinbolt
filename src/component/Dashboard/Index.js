@@ -192,13 +192,13 @@ function Dashboard(props) {
             <div className="copycontainer">
               <h5>
                 Your referral link:
-                {`${window.location.origin}/invite/${props.userdata.id}`}
+                {`${window.location.origin}/invite:${props.userdata.id}`}
               </h5>
               <Button
                 variant="outline-warning"
                 onClick={() =>
                   navigator.clipboard.writeText(
-                    `${window.location.origin}/invite/${props.userdata.id}`
+                    `${window.location.origin}/invite:${props.userdata.id}`
                   )
                 }
               >

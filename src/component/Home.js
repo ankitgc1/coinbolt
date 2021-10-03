@@ -100,7 +100,7 @@ function Home(props) {
                         //   "type of register id is----<<<",
                         //   typeof regNo
                         // );
-                        props.registerUser(false, regNo);
+                        props.registerUser("reg", regNo);
                         history.push("/dashboard");
                         // if (changeroute) {
                         //     history.push("/dashboard");
@@ -134,7 +134,7 @@ function Home(props) {
                         //   "type of view id is----<<<",
                         //   viewID
                         // );
-                        props.registerUser(true, viewID);
+                        props.registerUser("visit", viewID);
                         history.push("/visitorDashboard");
                         // props.viewingData(viewID);
                       }}
