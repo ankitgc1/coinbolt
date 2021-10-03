@@ -21,6 +21,9 @@ function ViewUserProfile(props) {
   `;
 
   console.log(props.viewuserdata);
+  const date = new Date(props.Joiningdate);
+  console.log("props.earnBusd", props.earnBusd, "props.Joiningdate", props.Joiningdate);
+
 
   return (
     <div>
@@ -102,13 +105,13 @@ function ViewUserProfile(props) {
                       }}
                     >
                       <div className="asideuser-data">
-                        <h6>First Diract ID </h6>&nbsp;&nbsp;&nbsp;
+                        <h6>First Downline ID </h6>&nbsp;&nbsp;&nbsp;
                         <h3 style={{ color: "#f1c645" }}>
                           {props.chailddata[0].id}
                         </h3>
                       </div>
                       <div className="asideuser-data">
-                        <h6>First Diract level's </h6>&nbsp;&nbsp;&nbsp;
+                        <h6>First Downline level's </h6>&nbsp;&nbsp;&nbsp;
                         <h3 style={{ color: "#f1c645" }}>
                           {" "}
                           {props.chailddata[0].currentLevel}
@@ -131,14 +134,14 @@ function ViewUserProfile(props) {
                       }}
                     >
                       <div className="asideuser-data">
-                        <h6>Second Diract ID </h6>&nbsp;&nbsp;&nbsp;
+                        <h6>Second Downline ID </h6>&nbsp;&nbsp;&nbsp;
                         <h3 style={{ color: "#f1c645" }}>
                           {" "}
                           {props.chailddata[1].id}
                         </h3>
                       </div>
                       <div className="asideuser-data">
-                        <h6>Second Diract's level </h6>&nbsp;&nbsp;&nbsp;
+                        <h6>Second Downline's level </h6>&nbsp;&nbsp;&nbsp;
                         <h3 style={{ color: "#f1c645" }}>
                           {" "}
                           {props.chailddata[1].currentLevel}
@@ -166,13 +169,19 @@ function ViewUserProfile(props) {
                 />
               </div>
 
-              <section class="content">
+              <section class="content" style={{ padding: "10px" }}>
                 <div class="row">
                   <div class="col-lg-4 col-12">
-                    <div class="row">
+                    <div
+                      class="row"
+                      style={{ marginTop: "15px", fontSize: "20px" }}
+                    >
                       <div class="col-lg-6 col-12">
                         <div class="box">
-                          <div class="box-body bg-dark">
+                          <div
+                            class="box-body bg-dark"
+                            style={{ padding: "0.5rem" }}
+                          >
                             <div class="chart">
                               <div
                                 id="chartdiv3"
@@ -188,18 +197,18 @@ function ViewUserProfile(props) {
                                         ticking={true}
                                         style={{ color: " #f9d14a" }}
                                         timezone={"GMT"}
-                                        // timezone={"US/Pacific"}
+                                      // timezone={"US/Pacific"}
                                       />
                                     </div>
                                   </div>
                                 </div>
-                                <div style={{ marginTop: "5px" }}>
-                                  <h5 style={{ color: "#f9d14a" }}>
-                                    Joining Date
-                                  </h5>
-                                  {/* <h5>{date.toLocaleDateString()}</h5>
-                                  <h6>{date.toLocaleTimeString()}</h6> */}
-                                </div>
+                                {/* {date ?
+                                  <div style={{ marginTop: "5px" }}>
+                                    <h5 style={{ color: "#f9d14a" }}>
+                                      Joining Date
+                                    </h5>
+                                    <h5>{date.toLocaleDateString()}</h5>
+                                  </div> : ""} */}
                               </div>
                             </div>
                           </div>
@@ -216,10 +225,13 @@ function ViewUserProfile(props) {
                         </div>
                         <div
                           class="box-body "
-                          style={{ backgroundColor: " #252930" }}
+                          style={{
+                            backgroundColor: " #252930",
+                            padding: "0.5rem",
+                          }}
                         >
                           <p
-                            class="font-size-40 text-pink"
+                            class="font-size-30 text-pink"
                             style={{ textAlign: "center", color: "#f1c645" }}
                           >
                             {/* <i class="fa fa-money text-muted mr-5 mb-20"></i> */}
@@ -240,6 +252,90 @@ function ViewUserProfile(props) {
                   </div>
                   {/* //// level cards */}
                   <div className="center-divs">
+                    {/* mobile card  */}
+                    <div className="user-pro-mob">
+                      <div class="" style={{ marginTop: "50px" }}>
+                        <div id="chartdiv3" class="">
+                          <div className="asideuser-data">
+                            <h4>Your ID </h4>&nbsp;&nbsp;&nbsp;
+                            <h2> {props.userdata.id}</h2>
+                          </div>
+
+                          <div className="asideuser-data">
+                            <h4>Level </h4>&nbsp;&nbsp;&nbsp;
+                            <h2>{props.userdata.currentLevel}</h2>
+                          </div>
+                          <div className="asideuser-data">
+                            {" "}
+                            <h4>Referrer ID </h4>&nbsp;&nbsp;&nbsp;
+                            <h2> {props.userdata.referrerID}</h2>
+                          </div>
+
+                          {props.chailddata[0] ? (
+                            <div
+                              style={{
+                                backgroundColor: "#343A40",
+                                margin: "20px",
+                                minHeight: "100px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                flexDirection: "column",
+                              }}
+                            >
+                              <div className="asideuser-data">
+                                <h6>First Downline ID </h6>&nbsp;&nbsp;&nbsp;
+                                <h3 style={{ color: "#f1c645" }}>
+                                  {props.chailddata[0].id}
+                                </h3>
+                              </div>
+                              <div className="asideuser-data">
+                                <h6>First Downline level's </h6>
+                                &nbsp;&nbsp;&nbsp;
+                                <h3 style={{ color: "#f1c645" }}>
+                                  {" "}
+                                  {props.chailddata[0].currentLevel}
+                                </h3>
+                              </div>
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                          {props.chailddata[1] ? (
+                            <div
+                              style={{
+                                backgroundColor: "#343A40",
+                                margin: "20px",
+                                minHeight: "100px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                flexDirection: "column",
+                              }}
+                            >
+                              <div className="asideuser-data">
+                                <h6>Second Downline ID </h6>&nbsp;&nbsp;&nbsp;
+                                <h3 style={{ color: "#f1c645" }}>
+                                  {" "}
+                                  {props.chailddata[1].id}
+                                </h3>
+                              </div>
+                              <div className="asideuser-data">
+                                <h6>Second Downline's level </h6>
+                                &nbsp;&nbsp;&nbsp;
+                                <h3 style={{ color: "#f1c645" }}>
+                                  {" "}
+                                  {props.chailddata[1].currentLevel}
+                                </h3>
+                              </div>
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="center-divs-inner">
                       {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => {
                         return (
@@ -273,94 +369,12 @@ function ViewUserProfile(props) {
                         );
                       })}
                     </div>
-                    {/* mobile card  */}
-                    <div className="user-pro-mob">
-                      <div class="" style={{ marginTop: "50px" }}>
-                        <div id="chartdiv3" class="">
-                          <div className="asideuser-data">
-                            <h4>Your ID </h4>&nbsp;&nbsp;&nbsp;
-                            <h2> {props.userdata.id}</h2>
-                          </div>
-
-                          <div className="asideuser-data">
-                            <h4>Level </h4>&nbsp;&nbsp;&nbsp;
-                            <h2>{props.userdata.currentLevel}</h2>
-                          </div>
-                          <div className="asideuser-data">
-                            {" "}
-                            <h4>Referrer ID </h4>&nbsp;&nbsp;&nbsp;
-                            <h2> {props.userdata.referrerID}</h2>
-                          </div>
-
-                          {props.chailddata[0] ? (
-                            <div
-                              style={{
-                                backgroundColor: "#343A40",
-                                margin: "20px",
-                                minHeight: "100px",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                flexDirection: "column",
-                              }}
-                            >
-                              <div className="asideuser-data">
-                                <h6>First Diract ID </h6>&nbsp;&nbsp;&nbsp;
-                                <h3 style={{ color: "#f1c645" }}>
-                                  {props.chailddata[0].id}
-                                </h3>
-                              </div>
-                              <div className="asideuser-data">
-                                <h6>First Diract level's </h6>&nbsp;&nbsp;&nbsp;
-                                <h3 style={{ color: "#f1c645" }}>
-                                  {" "}
-                                  {props.chailddata[0].currentLevel}
-                                </h3>
-                              </div>
-                            </div>
-                          ) : (
-                            ""
-                          )}
-                          {props.chailddata[1] ? (
-                            <div
-                              style={{
-                                backgroundColor: "#343A40",
-                                margin: "20px",
-                                minHeight: "100px",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                flexDirection: "column",
-                              }}
-                            >
-                              <div className="asideuser-data">
-                                <h6>Second Diract ID </h6>&nbsp;&nbsp;&nbsp;
-                                <h3 style={{ color: "#f1c645" }}>
-                                  {" "}
-                                  {props.chailddata[1].id}
-                                </h3>
-                              </div>
-                              <div className="asideuser-data">
-                                <h6>Second Diract's level </h6>
-                                &nbsp;&nbsp;&nbsp;
-                                <h3 style={{ color: "#f1c645" }}>
-                                  {" "}
-                                  {props.chailddata[1].currentLevel}
-                                </h3>
-                              </div>
-                            </div>
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      </div>
-                    </div>
                   </div>
                   <div class="col-lg-5 col-12" style={{ marginTop: "10px" }}>
                     <div class="box" style={{ backgroundColor: "#252930" }}>
                       <div class="box-header">
                         <h4 class="box-title">
-                          <i class="fa fa-file mr-15"></i>Team Detail
+                          <i class="fa fa-file mr-15"></i>Compensation plan
                         </h4>
                       </div>
                       <div class="box-body p-0">

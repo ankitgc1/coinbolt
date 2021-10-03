@@ -8,10 +8,10 @@ function Services() {
       <section id="saas_two_service" className="saas_two_service_section">
         <div className="container">
           <div className="saas_two_section_title saas2-headline text-center">
-            <span className="title_tag">Our awesome services</span>
-            <h2 style={{ color: "#fff" }}>
+            <span className="title_tag">Why Coinsbolt?</span>
+            {/* <h2 style={{ color: "#fff" }}>
               We give <span>best facilites</span>{" "}
-            </h2>
+            </h2> */}
           </div>
           {/* /section title */}
           <div className="service_content">
@@ -443,8 +443,9 @@ function Services() {
                   <div className="service_text_box saas2-headline pera-content">
                     <h3>Super security</h3>
                     <p>
-                      Whether you have a team of 2 or 200, the Mailboxes keep
-                      everyone the same page. Leverage automation to move fast.
+                      Coinsbolt is under a very secured blockchain (Binance
+                      Smart Chain) which makes the entire system secured and
+                      impenetrable.
                     </p>
                   </div>
                 </div>
@@ -452,7 +453,6 @@ function Services() {
               {/* /service-content */}
             </div>
           </div>
-          
         </div>
       </section>
       {/* End of service section    

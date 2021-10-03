@@ -74,12 +74,9 @@ function Footer() {
                       <img src="images/img-logo.png" alt />
                     </div>
                     <div className="footer_about">
-                      30 Commercial Road Fratton PORTSMOUTH Hampshire PO1 1AA
-                      UNITED KINGDOM
+                      Coinsbolt is governed by a decentralized community
                     </div>
-                    <span>Open Hours: </span>
-                    <p>Mon - Sat: 8 am - 5 pm, Sunday: CLOSED</p>
-                  </div>
+                             </div>
                 </div>
               </div>
               <div className="col-lg-4 col-md-12">
@@ -161,7 +158,7 @@ function Footer() {
         </div>
       </footer>
       <div className="s2-copyright text-center">
-        2020 © All rights reserved by <a href="#">Themexriver</a>
+        2020 © All rights reserved By <a href="/">Coinsbolt</a>
       </div>
       {/* End of footer section 
   ============================================= */}

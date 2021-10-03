@@ -140,7 +140,7 @@ function Features() {
                           Purchase Level 2 from your 2nd level upline by sending
                           payment of $20 Your referrals on your 2nd line will
                           purchase Level 2 through you, sending you a payment of
-                          $20,000 X 4 (No. of team members on your 2nd line
+                          $20 X 4 (No. of team members on your 2nd line
                           within the matrix) giving you a total of $80
                         </p>
                       </div>
@@ -179,43 +179,6 @@ function Features() {
   ============================================= */}
       </div>
       <div>
-        {/* Start of integration section   
-  ============================================= */}
-        <section id="integration" className="integration_section">
-          <div className="container">
-            <div className="row">
-              <div
-                className="col-lg-7 col-md-12 wow fadeFromLeft"
-                data-wow-delay="0ms"
-                data-wow-duration="1500ms"
-              >
-                <div className="integration_img">
-                  <img src="images/banner-in.png" alt />
-                </div>
-              </div>
-              <div
-                className="col-lg-5 wow fadeFromRight"
-                data-wow-delay="0ms"
-                data-wow-duration="1500ms"
-              >
-                <div className="integration_text saas2-headline pera-content">
-                  <span className="feature_tag">Our awesome features </span>
-                  <h2>
-                    SaaSio use <span>the tool</span>
-                    you love
-                  </h2>
-                  <p>
-                    Say goodbye to manual data entry. Integrate with the tools
-                    you depend on so your team can get proposals, contracts and
-                    quotes out the door fast.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* End of integration section   
-  ============================================= */}
       </div>
     </>
   );

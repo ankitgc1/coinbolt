@@ -11,9 +11,10 @@
   margin: auto;
 }
 .clock-wall {
+  margin-top: 20px;
   width: 100%;
   border-radius: 50%;
-  height: 150px;
+  height: 150px !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -74,7 +75,7 @@
   flex-wrap: wrap;
 }
 .center-divs-inner {
-  width: 250px;
+  width: 200px;
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: 1fr 1fr;
@@ -147,18 +148,25 @@
 .mob-logo-icon {
   display: none;
 }
+tr td {
+  padding: 0.5rem !important;
+}
 @media screen and (max-width: 480px) {
   .copycontainer {
     width: 100%;
   }
   .clock-wall {
-    width: 75%;
-    height: 150px;
+    width: 55%;
+    height: 135px;
     margin: auto;
   }
   .clock-inerwall {
     width: 85%;
-    height: 135px;
+    height: 115px;
+    font-size: 20px !important;
+  }
+  .center-divs-inner {
+    width: 225px;
   }
   .mob-logo-con {
     width: 90%;

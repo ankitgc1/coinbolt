@@ -34,10 +34,10 @@ function Dashboard(props) {
     "console user data in chailddata chailddata //////",
     props.chailddata,
     "//////"
-    // props.chailddata[0].currentLevel
-  );
-
-  const date = new Date(props.date);
+    );
+  // debugger;
+  const date = new Date(props.Joiningdate);
+  console.log("props.earnBusd", props.earnBusd, "props.Joiningdate", props.Joiningdate);
 
   const genratrefral = "abc";
   // window.location + "/id:/" + props.userdata.id + "/" + props.account;
@@ -108,7 +108,7 @@ function Dashboard(props) {
                 </a>
               </div>
               <div class="profile-pic" style={{ marginTop: "50px" }}>
-                <div id="chartdiv3" class="h-200">
+                <div id="chartdiv3" >
                   <div className="asideuser-data">
                     <h4>Your ID </h4>&nbsp;&nbsp;&nbsp;
                     <h2> {props.userdata.id}</h2>
@@ -190,7 +190,6 @@ function Dashboard(props) {
 
           <div class="content-wrapper">
             <div className="copycontainer">
-              <h4>Your referral link:</h4>
               <h5>
                 Your referral link:
                 {`${window.location.origin}/invite/${props.userdata.id}`}
@@ -203,7 +202,7 @@ function Dashboard(props) {
                   )
                 }
               >
-                Copy to clipboard
+                Copy
               </Button>
             </div>
             <div class="container-full">
@@ -218,17 +217,19 @@ function Dashboard(props) {
                 />
               </div>
 
-              <section class="content">
+              <section class="content" style={{ padding: "10px" }}>
                 <div class="row">
                   <div class="col-lg-4 col-12">
-                    <div class="row">
+                    <div class="row" style={{ marginTop: "15px" }}>
                       <div class="col-lg-6 col-12">
                         <div class="box">
-                          <div class="box-body bg-dark">
+                          <div
+                            class="box-body bg-dark"
+                            style={{ padding: "0px" }}
+                          >
                             <div class="chart">
                               <div
                                 id="chartdiv3"
-                                class="h-200"
                                 style={{ textAlign: "center" }}
                               >
                                 <div className="clock-container">
@@ -240,18 +241,18 @@ function Dashboard(props) {
                                         ticking={true}
                                         style={{ color: " #f9d14a" }}
                                         timezone={"GMT"}
-                                        // timezone={"US/Pacific"}
+                                      // timezone={"US/Pacific"}
                                       />
                                     </div>
                                   </div>
                                 </div>
-                                <div style={{ marginTop: "5px" }}>
-                                  <h5 style={{ color: "#f9d14a" }}>
-                                    Joining Date
-                                  </h5>
-                                  <h5>{date.toLocaleDateString()}</h5>
-                                  {/* <h6>{date.toLocaleTimeString()}</h6> */}
-                                </div>
+                                {date ?
+                                  <div style={{ marginTop: "5px" }}>
+                                    <h5 style={{ color: "#f9d14a" }}>
+                                      Joining Date
+                                    </h5>
+                                    <h5>{date.toLocaleDateString()}</h5>
+                                  </div> : ""}
                               </div>
                             </div>
                           </div>
@@ -271,7 +272,7 @@ function Dashboard(props) {
                             class="box-body "
                             style={{ backgroundColor: " #252930" }}
                           >
-                            <p class="font-size-40 text-pink">
+                            <p class="font-size-30 text-pink">
                               {/* <i class="fa fa-money text-muted mr-5 mb-20"></i> */}
                               {/* <br></br> */}
                               <strong className="busdbalance">
@@ -338,43 +339,10 @@ function Dashboard(props) {
                   </div>
                   {/* //// level cards */}
                   <div className="center-divs">
-                    <div className="center-divs-inner">
-                      {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => {
-                        return (
-                          <>
-                            {item <= props.userdata.currentLevel ? (
-                              <div className="center-box-buy">
-                                <div>
-                                  <h5>{item} Level</h5>
-                                </div>
-                                <div>
-                                  <p>
-                                    <FcBusinessman />
-                                  </p>
-                                </div>
-                                <div>{/* <h6> Members</h6> */}</div>
-                              </div>
-                            ) : (
-                              <div className="center-box">
-                                <div>
-                                  <h5>{item} Level</h5>
-                                </div>
-                                <div>
-                                  <p>
-                                    <FcBusinessman />
-                                  </p>
-                                </div>
-                                <div>{/* <h6> Members</h6> */}</div>
-                              </div>
-                            )}
-                          </>
-                        );
-                      })}
-                    </div>
                     {/* mobile card  */}
                     <div className="user-pro-mob">
                       <div class="" style={{ marginTop: "50px" }}>
-                        <div id="chartdiv3" class="">
+                        <div id="chartdiv3" >
                           <div className="asideuser-data">
                             <h4>Your ID </h4>&nbsp;&nbsp;&nbsp;
                             <h2> {props.userdata.id}</h2>
@@ -453,12 +421,46 @@ function Dashboard(props) {
                         </div>
                       </div>
                     </div>
+
+                    <div className="center-divs-inner">
+                      {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => {
+                        return (
+                          <>
+                            {item <= props.userdata.currentLevel ? (
+                              <div className="center-box-buy">
+                                <div>
+                                  <h5>{item} Level</h5>
+                                </div>
+                                <div>
+                                  <p>
+                                    <FcBusinessman />
+                                  </p>
+                                </div>
+                                <div>{/* <h6> Members</h6> */}</div>
+                              </div>
+                            ) : (
+                              <div className="center-box">
+                                <div>
+                                  <h5>{item} Level</h5>
+                                </div>
+                                <div>
+                                  <p>
+                                    <FcBusinessman />
+                                  </p>
+                                </div>
+                                <div>{/* <h6> Members</h6> */}</div>
+                              </div>
+                            )}
+                          </>
+                        );
+                      })}
+                    </div>
                   </div>
                   <div class="col-lg-5 col-12" style={{ marginTop: "10px" }}>
                     <div class="box" style={{ backgroundColor: "#252930" }}>
                       <div class="box-header">
                         <h4 class="box-title">
-                          <i class="fa fa-file mr-15"></i>Team Detail
+                          <i class="fa fa-file mr-15"></i>Compensation plan
                         </h4>
                       </div>
                       <div class="box-body p-0">

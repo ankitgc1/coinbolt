@@ -14,11 +14,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { currentRefralid } from "./redux/sellerReducer";
 import Dashboard from "./component/Dashboard/Index";
 import moment from "moment";
-// import VisitorDashbaord from './component/visitorDashboard';
 import ViewUserProfile from "./component/viewUserProfile/Index";
 
-// console.log("lol");
-// window.location = window.location.origin;
 
 function App(props) {
   const [contract, setContract] = useState();
@@ -31,7 +28,7 @@ function App(props) {
   const [reguserId, setReguserId] = useState({});
   const [userdata, setUserdata] = useState({});
   const [viewuserdata, setViewUserdata] = useState({});
-  const [date, setDate] = useState();
+  const [Joiningdate, setJoiningDate] = useState();
   const [chailddata, setChaildata] = useState([]);
   const [chaildaddr, setChailaddr] = useState([]);
   var referrerID = 1;
@@ -138,6 +135,7 @@ function App(props) {
     }
   };
   const chailAddressData = async () => {
+    setChaildata([]);
     if (chaildaddr[0]) {
       const child1 = await contract.methods.users(chaildaddr[0]).call();
       setChaildata((pre) => [...pre, child1]);
@@ -154,13 +152,13 @@ function App(props) {
       const address = await contract.methods.userList(id).call();
       const data = await contract.methods.users(address).call();
       setViewUserdata(data);
-    } else if(!v && id) {
+    } else if (!v && id) {
       const userregister = await contract.methods
         .regUser(id)
         .send({ from: account });
       setChagroute(true);
     }
-    else{
+    else {
       const userregister = await contract.methods
         .regUser(referrerID)
         .send({ from: account });
@@ -181,22 +179,28 @@ function App(props) {
     if (contract && account) {
       // debugger;
       for (let i = 1; i <= 8; i++) {
+        // debugger;
         let earning = await window.web3.utils.fromWei(
           await contract.methods.EarnedBusd(account, i).call()
         );
-        sum = sum + Number(earning);
         // console.log("earn usdt is ---->", i, earning);
+        sum = sum + Number(earning);
       }
+      // set earning busd in line 191
       setEarnBusd(sum);
-      // console.log("sum is", sum);
+      console.log("sum is", sum);
     }
   };
   const getCreateDate = async () => {
     if (account) {
+      // debugger;
       let date = await contract.methods.createdDate(account).call();
+      console.log("date joining", date);
       let epochValue = moment.unix(date).utc()._d.toString();
       console.log("date is get  created----->", moment.unix(date).utc()._d);
-      setDate(epochValue);
+      console.log("epochValue....................", epochValue)
+      // set exastngeting date in line 202
+      setJoiningDate(epochValue);
     }
   };
 
@@ -206,7 +210,7 @@ function App(props) {
   };
 
   const loadContract = async () => {
-    let ABI = [{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"UserAddress","type":"address"},{"indexed":false,"internalType":"uint256","name":"Levelno","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"Time","type":"uint256"}],"name":"buyLevelEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"UserAddress","type":"address"},{"indexed":false,"internalType":"uint256","name":"UserId","type":"uint256"},{"indexed":true,"internalType":"address","name":"ReferrerAddress","type":"address"},{"indexed":false,"internalType":"uint256","name":"ReferrerId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"Levelno","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"LevelPrice","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"Time","type":"uint256"}],"name":"getMoneyForLevelEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"UserAddress","type":"address"},{"indexed":false,"internalType":"uint256","name":"UserId","type":"uint256"},{"indexed":true,"internalType":"address","name":"ReferrerAddress","type":"address"},{"indexed":false,"internalType":"uint256","name":"ReferrerId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"Levelno","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"LevelPrice","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"Time","type":"uint256"}],"name":"lostMoneyForLevelEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"UserAddress","type":"address"},{"indexed":true,"internalType":"address","name":"ReferrerAddress","type":"address"},{"indexed":false,"internalType":"uint256","name":"Time","type":"uint256"}],"name":"regLevelEvent","type":"event"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"EarnedBusd","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"LEVEL_PRICE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"PERIOD_LENGTH","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"adminFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_level","type":"uint256"}],"name":"buyLevel","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"createdDate","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"currentId","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"_userAddress","type":"address"}],"name":"findFreeReferrer","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getTotalEarnedBUSD","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"loopCheck","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"ownerAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_referrerID","type":"uint256"}],"name":"regUser","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_adminFee","type":"uint256"}],"name":"updateFeePercentage","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_level","type":"uint256"},{"internalType":"uint256","name":"_price","type":"uint256"}],"name":"updatePrice","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"userList","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"users","outputs":[{"internalType":"bool","name":"isExist","type":"bool"},{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"referrerID","type":"uint256"},{"internalType":"uint256","name":"currentLevel","type":"uint256"},{"internalType":"uint256","name":"totalEarningBUSD","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"_userAddress","type":"address"}],"name":"viewUserReferral","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"}]
+    let ABI = [{ "inputs": [], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "UserAddress", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "Levelno", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "Time", "type": "uint256" }], "name": "buyLevelEvent", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "UserAddress", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "UserId", "type": "uint256" }, { "indexed": true, "internalType": "address", "name": "ReferrerAddress", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "ReferrerId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "Levelno", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "LevelPrice", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "Time", "type": "uint256" }], "name": "getMoneyForLevelEvent", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "UserAddress", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "UserId", "type": "uint256" }, { "indexed": true, "internalType": "address", "name": "ReferrerAddress", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "ReferrerId", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "Levelno", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "LevelPrice", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "Time", "type": "uint256" }], "name": "lostMoneyForLevelEvent", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "UserAddress", "type": "address" }, { "indexed": true, "internalType": "address", "name": "ReferrerAddress", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "Time", "type": "uint256" }], "name": "regLevelEvent", "type": "event" }, { "constant": true, "inputs": [{ "internalType": "address", "name": "", "type": "address" }, { "internalType": "uint256", "name": "", "type": "uint256" }], "name": "EarnedBusd", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "name": "LEVEL_PRICE", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "PERIOD_LENGTH", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "adminFee", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "_level", "type": "uint256" }], "name": "buyLevel", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "createdDate", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "currentId", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "address", "name": "_userAddress", "type": "address" }], "name": "findFreeReferrer", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getTotalEarnedBUSD", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "loopCheck", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "ownerAddress", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "_referrerID", "type": "uint256" }], "name": "regUser", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "_adminFee", "type": "uint256" }], "name": "updateFeePercentage", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "_level", "type": "uint256" }, { "internalType": "uint256", "name": "_price", "type": "uint256" }], "name": "updatePrice", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "name": "userList", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "users", "outputs": [{ "internalType": "bool", "name": "isExist", "type": "bool" }, { "internalType": "uint256", "name": "id", "type": "uint256" }, { "internalType": "uint256", "name": "referrerID", "type": "uint256" }, { "internalType": "uint256", "name": "currentLevel", "type": "uint256" }, { "internalType": "uint256", "name": "totalEarningBUSD", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "address", "name": "_userAddress", "type": "address" }], "name": "viewUserReferral", "outputs": [{ "internalType": "address[]", "name": "", "type": "address[]" }], "payable": false, "stateMutability": "view", "type": "function" }]
     const contract = await new window.web3.eth.Contract(
       ABI,
       "0x38cC0003E3E7e8Ba90396F2EF09CB0Bf03A95C05"
@@ -545,7 +549,7 @@ function App(props) {
               contract={contract}
               userdata={userdata}
               chailddata={chailddata}
-              date={date}
+              Joiningdate={Joiningdate}
             />
           )}
         />

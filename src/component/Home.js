@@ -113,7 +113,9 @@ function Home(props) {
                       <i className="fas fa-clipboard-list" />
                       Registration
                     </a>
-                    <h4 style={{marginTop:'25px'}}>Enter Id for check account</h4>
+                    <h4 style={{ marginTop: "25px" }}>
+                      Enter ID to view account
+                    </h4>
                     <input
                       type="number"
                       placeholder="Enter Id"

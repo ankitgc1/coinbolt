@@ -20,7 +20,7 @@
   background-color: #16191d;
 }
 .clock-inerwall {
-  width: 85%;
+  width: 80%;
   border-radius: 50%;
   height: 130px;
   background-color: #343a40;
@@ -63,7 +63,7 @@
   margin: 15px auto;
 }
 .copycontainer {
-  width: 60%;
+  width: 45% !important;
   height: 35px;
   /* border-radius: 15px; */
   font-size: 16px;
@@ -74,7 +74,7 @@
   flex-wrap: wrap;
 }
 .center-divs-inner {
-  width: 250px;
+  width: 200px;
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: 1fr 1fr;
@@ -127,6 +127,10 @@
   align-items: center;
   justify-content: space-between;
 }
+.chartdiv3{
+  min-height: 235px !important;
+  margin-top: 5px;
+}
 .menuebar {
   width: 90%;
   margin: auto;
@@ -147,18 +151,26 @@
 .mob-logo-icon {
   display: none;
 }
+tr td {
+  padding: 0.5rem !important;
+}
 @media screen and (max-width: 480px) {
   .copycontainer {
     width: 100%;
   }
   .clock-wall {
-    width: 75%;
-    height: 150px;
+    width: 55%;
+    background-color: #ffffff;
+    height: 135px;
     margin: auto;
   }
   .clock-inerwall {
     width: 85%;
-    height: 135px;
+    height: 115px;
+    font-size: 20px !important;
+  }
+  .center-divs-inner {
+    width: 225px;
   }
   .mob-logo-con {
     width: 90%;

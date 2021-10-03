@@ -44,9 +44,9 @@ function Main(props) {
       />
       <Services />
       <About />
-      <Features />
-      <Team />
+      {/* <Team /> */}
       <Faq />
+      <Features/>
       <Pricing />
       <Footer />
     </div>
