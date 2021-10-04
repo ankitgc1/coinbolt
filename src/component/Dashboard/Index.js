@@ -36,8 +36,8 @@ function Dashboard(props) {
     "//////"
     );
   // debugger;
-  const date = new Date(props.Joiningdate);
-  console.log("props.earnBusd", props.earnBusd, "props.Joiningdate", props.Joiningdate);
+  const date = new Date(props.createdDate);
+  console.log("props.earnBusd", props.earnBusd, "props.createdDate", props.createdDate);
 
   const genratrefral = "abc";
   // window.location + "/id:/" + props.userdata.id + "/" + props.account;
