@@ -276,7 +276,7 @@ function Dashboard(props) {
                               {/* <i class="fa fa-money text-muted mr-5 mb-20"></i> */}
                               {/* <br></br> */}
                               <strong className="busdbalance">
-                                {props.earnBusd ? props.earnBusd : "0"}
+                                {props.earnBusd / 1000000000000000000 ? props.earnBusd : "0"}
                               </strong>
                             </p>
                           </div>
