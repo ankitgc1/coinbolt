@@ -148,13 +148,13 @@ function App(props) {
 
   const registerUser = async (v, id) => {
     console.log("View data", id);
-    if (v=="vist") {
+    if (v) {
       const address = await contract.methods.userList(id).call();
       console.log("address", address);
       const data = await contract.methods.users(address).call();
       console.log("data", data);
       setViewUserdata(data);
-    } else if (v=="reg") {
+    } else if (!v && id) {
       const userregister = await contract.methods
         .regUser(id)
         .send({ from: account });
