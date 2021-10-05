@@ -180,7 +180,7 @@ function App(props) {
     let sum = 0;
     if (contract && account) {
       const data = await contract.methods.users(account).call();
-      setEarnBusd(data.totalEarningBUSD);
+      setEarnBusd(data.totalEarningBUSD/1000000000000000000);
       // debugger;
       // for (let i = 1; i <= 8; i++) {
       //   // debugger;
