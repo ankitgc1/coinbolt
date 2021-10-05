@@ -179,18 +179,20 @@ function App(props) {
   const totalEarningUSDT = async () => {
     let sum = 0;
     if (contract && account) {
+      const data = await contract.methods.users(account).call();
+      setEarnBusd(data.totalEarningBUSD);
       // debugger;
-      for (let i = 1; i <= 8; i++) {
-        // debugger;
-        let earning = await window.web3.utils.fromWei(
-          await contract.methods.EarnedBusd(account, i).call()
-        );
-        // console.log("earn usdt is ---->", i, earning);
-        sum = sum + Number(earning);
-      }
+      // for (let i = 1; i <= 8; i++) {
+      //   // debugger;
+      //   let earning = await window.web3.utils.fromWei(
+      //     await contract.methods.EarnedBusd(account, i).call()
+      //   );
+      //   // console.log("earn usdt is ---->", i, earning);
+      //   sum = sum + Number(earning);
+      // }
       // set earning busd in line 191
-      setEarnBusd(sum);
-      console.log("sum is", sum);
+      // setEarnBusd(sum);
+      // console.log("sum is", sum);
     }
   };
   const getCreateDate = async () => {
