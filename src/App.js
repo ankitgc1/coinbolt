@@ -154,12 +154,13 @@ function App(props) {
       const data = await contract.methods.users(address).call();
       console.log("data", data);
       setViewUserdata(data);
-    } else if (!v && id) {
-      const userregister = await contract.methods
-        .regUser(id)
-        .send({ from: account });
-      setChagroute(true);
-    }
+    } 
+    // else if (!v && id) {
+    //   const userregister = await contract.methods
+    //     .regUser(id)
+    //     .send({ from: account });
+    //   setChagroute(true);
+    // }
     else {
       const userregister = await contract.methods
         .regUser(referrerID)
