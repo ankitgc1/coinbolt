@@ -31,10 +31,10 @@ function App(props) {
   const [Joiningdate, setJoiningDate] = useState();
   const [chailddata, setChaildata] = useState([]);
   const [chaildaddr, setChailaddr] = useState([]);
-  var referrerID = 1;
+  var referrer_ID = 1;
 
   if (window.location.href.includes("invite")) {
-    referrerID = window.location.href.split("/")[3].split(':')[1];
+    referrer_ID = window.location.href.split("/")[3].split(':')[1];
   }
 
   const dispatch = useDispatch();
@@ -155,15 +155,16 @@ function App(props) {
       console.log("data", data);
       setViewUserdata(data);
     } 
-    // else if (!v && id) {
-    //   const userregister = await contract.methods
-    //     .regUser(id)
-    //     .send({ from: account });
-    //   setChagroute(true);
-    // }
+    else if (referrer_ID) {
+      const userregister = await contract.methods
+      .regUser(referrer_ID)
+      .send({ from: account });
+      setChagroute(true);
+     
+    }
     else {
       const userregister = await contract.methods
-        .regUser(referrerID)
+        .regUser(id)
         .send({ from: account });
       setChagroute(true);
     }
@@ -527,7 +528,7 @@ function App(props) {
           )}
         />
         <Route
-          path="/invite:referrerID"
+          path="/invite:referrer_ID"
           exact
           component={() => (
             <Main
@@ -535,7 +536,7 @@ function App(props) {
               idinput={idinput}
               chagngeroute={chagroute}
               registerUser={registerUser}
-              referrerID={referrerID}
+              referrerID={referrer_ID}
             />
           )}
         />
