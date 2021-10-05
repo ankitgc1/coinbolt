@@ -37,7 +37,7 @@ function Dashboard(props) {
     );
   // debugger;
   const date = new Date(props.createdDate);
-  console.log("props.earnBusd", props.earnBusd, "props.createdDate", props.createdDate);
+  console.log("props.totalEarningBUSD", props.totalEarningBUSD, "props.createdDate", props.createdDate);
 
   const genratrefral = "abc";
   // window.location + "/id:/" + props.userdata.id + "/" + props.account;
@@ -276,7 +276,7 @@ function Dashboard(props) {
                               {/* <i class="fa fa-money text-muted mr-5 mb-20"></i> */}
                               {/* <br></br> */}
                               <strong className="busdbalance">
-                                {props.earnBusd ? props.earnBusd : "0"}
+                                {props.totalEarningBUSD ? props.totalEarningBUSD : "0"}
                               </strong>
                             </p>
                           </div>
